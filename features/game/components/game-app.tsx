@@ -9,6 +9,7 @@ import { SpacePuzzleScreen } from "@/components/screens/space-puzzle-screen";
 import { MemoryAgeTwoScreen } from "@/components/screens/memory-age-two-screen";
 import { TeddyPuzzleScreen } from "@/components/screens/teddy-puzzle-screen";
 import { MemoryAgeThreeScreen } from "@/components/screens/memory-age-three-screen";
+import { FinalPuzzleScreen } from "@/components/screens/final-puzzle-screen";
 
 import { SplashScreen } from "@/components/screens/splash-screen";
 
@@ -20,7 +21,8 @@ type GameStage =
   | "memory-2"
   | "teddy-puzzle"
   | "memory-3"
-  | "final-puzzle";
+  | "final-puzzle"
+  | "reveal";
 
 export function GameApp() {
   const [stage, setStage] = useState<GameStage>("splash");
@@ -53,11 +55,15 @@ export function GameApp() {
     return <MemoryAgeThreeScreen onContinue={() => setStage("final-puzzle")} />;
   }
 
+  if (stage === "final-puzzle") {
+    return <FinalPuzzleScreen onReveal={() => setStage("reveal")} />;
+  }
+
   return (
     <ScreenShell className="bg-ocean-100">
       <section className="flex min-h-dvh items-center justify-center px-6 text-center sm:min-h-[844px]">
         <h1 className="text-2xl font-extrabold text-navy-900">
-          Puzzle terakhir segera dimulai
+          Kejutan ulang tahun segera dibuka
         </h1>
       </section>
     </ScreenShell>
