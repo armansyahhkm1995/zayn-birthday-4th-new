@@ -10,7 +10,7 @@ export function SplashScreen({ onPlay }: SplashScreenProps) {
   return (
     <ScreenShell className="bg-ocean-500">
       <Image
-        src="/assets/backgrounds/underwater-splash.webp"
+        src="/assets/backgrounds/underwater-splash.png"
         alt=""
         fill
         priority
