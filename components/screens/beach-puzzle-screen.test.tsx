@@ -87,5 +87,19 @@ describe("BeachPuzzleScreen", () => {
 
     expect(whale).toBeDisabled();
     expect(target).toBeDisabled();
+
+    const completedBoard = screen.getByTestId("beach-board-completed");
+
+    expect(completedBoard).toHaveClass("opacity-100");
+
+    expect(completedBoard.getAttribute("src")).toContain(
+      "beach-board-completed.png",
+    );
+
+    expect(
+      screen.getByRole("button", {
+        name: /papan puzzle keluarga paus lengkap/i,
+      }),
+    ).toBeDisabled();
   });
 });

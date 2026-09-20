@@ -56,7 +56,7 @@ export function DaddyLetterScreen({ onReplay }: DaddyLetterScreenProps) {
 
           <figure className="relative h-[150px] overflow-hidden rounded-xl">
             <Image
-              src="/assets/reveal/daddy-family-photo.webp"
+              src="/assets/reveal/daddy-family-photo.jpg"
               alt="Foto keluarga Zayn bersama Daddy"
               fill
               sizes="262px"
