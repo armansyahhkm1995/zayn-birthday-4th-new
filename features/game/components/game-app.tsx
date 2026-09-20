@@ -6,6 +6,9 @@ import { ScreenShell } from "@/components/layout/screen-shell";
 import { BeachPuzzleScreen } from "@/components/screens/beach-puzzle-screen";
 import { MemoryAgeOneScreen } from "@/components/screens/memory-age-one-screen";
 import { SpacePuzzleScreen } from "@/components/screens/space-puzzle-screen";
+import { MemoryAgeTwoScreen } from "@/components/screens/memory-age-two-screen";
+import { TeddyPuzzleScreen } from "@/components/screens/teddy-puzzle-screen";
+import { MemoryAgeThreeScreen } from "@/components/screens/memory-age-three-screen";
 
 import { SplashScreen } from "@/components/screens/splash-screen";
 
@@ -14,7 +17,10 @@ type GameStage =
   | "beach-puzzle"
   | "memory-1"
   | "space-puzzle"
-  | "memory-2";
+  | "memory-2"
+  | "teddy-puzzle"
+  | "memory-3"
+  | "final-puzzle";
 
 export function GameApp() {
   const [stage, setStage] = useState<GameStage>("splash");
@@ -35,11 +41,23 @@ export function GameApp() {
     return <SpacePuzzleScreen onSolved={() => setStage("memory-2")} />;
   }
 
+  if (stage === "memory-2") {
+    return <MemoryAgeTwoScreen onContinue={() => setStage("teddy-puzzle")} />;
+  }
+
+  if (stage === "teddy-puzzle") {
+    return <TeddyPuzzleScreen onSolved={() => setStage("memory-3")} />;
+  }
+
+  if (stage === "memory-3") {
+    return <MemoryAgeThreeScreen onContinue={() => setStage("final-puzzle")} />;
+  }
+
   return (
     <ScreenShell className="bg-ocean-100">
       <section className="flex min-h-dvh items-center justify-center px-6 text-center sm:min-h-[844px]">
         <h1 className="text-2xl font-extrabold text-navy-900">
-          Memory Umur 2 segera dibuka
+          Puzzle terakhir segera dimulai
         </h1>
       </section>
     </ScreenShell>

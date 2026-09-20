@@ -9,19 +9,19 @@ const puzzlePieces = [
   {
     id: "star-whale",
     label: "Paus bintang",
-    image: "/assets/puzzles/space/space-piece-star-whale.png",
+    image: "/assets/puzzles/space/space-piece-dad-whale.png",
     placement: "left-[4%] top-[2%] h-[82px] w-[130px]",
   },
   {
     id: "planet-whale",
     label: "Paus planet",
-    image: "/assets/puzzles/space/space-piece-planet-whale.png",
+    image: "/assets/puzzles/space/space-piece-mom-whale.png",
     placement: "left-[14%] top-[43%] h-[82px] w-[110px]",
   },
   {
     id: "wing-whale",
     label: "Paus bersayap",
-    image: "/assets/puzzles/space/space-piece-wing-whale.png",
+    image: "/assets/puzzles/space/space-piece-son-whale.png",
     placement: "right-[8%] top-[48%] h-[78px] w-[100px]",
   },
 ] as const;
