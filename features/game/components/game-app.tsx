@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-import { ScreenShell } from "@/components/layout/screen-shell";
 import { BeachPuzzleScreen } from "@/components/screens/beach-puzzle-screen";
 import { MemoryAgeOneScreen } from "@/components/screens/memory-age-one-screen";
 import { SpacePuzzleScreen } from "@/components/screens/space-puzzle-screen";
@@ -13,6 +12,7 @@ import { FinalPuzzleScreen } from "@/components/screens/final-puzzle-screen";
 import { BirthdayRevealScreen } from "@/components/screens/birthday-reveal-screen";
 
 import { SplashScreen } from "@/components/screens/splash-screen";
+import { DaddyLetterScreen } from "@/components/screens/daddy-letter-screen";
 
 type GameStage =
   | "splash"
@@ -65,13 +65,5 @@ export function GameApp() {
     return <BirthdayRevealScreen onReadLetter={() => setStage("letter")} />;
   }
 
-  return (
-    <ScreenShell className="bg-ocean-100">
-      <section className="flex min-h-dvh items-center justify-center px-6 text-center sm:min-h-[844px]">
-        <h1 className="text-2xl font-extrabold text-navy-900">
-          Pesan dari Daddy segera dibuka
-        </h1>
-      </section>
-    </ScreenShell>
-  );
+  return <DaddyLetterScreen onReplay={() => setStage("splash")} />;
 }

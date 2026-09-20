@@ -29,7 +29,7 @@ describe("BirthdayRevealScreen", () => {
 
     await user.click(
       screen.getByRole("button", {
-        name: /baca pesan daddy/i,
+        name: /baca pesan aba & umma/i,
       }),
     );
 

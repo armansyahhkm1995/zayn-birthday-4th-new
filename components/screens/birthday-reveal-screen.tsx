@@ -53,7 +53,7 @@ export function BirthdayRevealScreen({
 
         <div className="absolute top-[190px] left-1/2 h-[402px] w-[310px] -translate-x-1/2">
           <Image
-            src="/assets/reveal/birthday-hero.webp"
+            src="/assets/reveal/birthday-hero.png"
             alt="Zayn tersenyum di depan kue ulang tahun"
             fill
             priority
@@ -63,7 +63,7 @@ export function BirthdayRevealScreen({
 
           <div className="absolute top-[155px] -left-7 size-[92px] overflow-hidden rounded-2xl border-4 border-white shadow-piece">
             <Image
-              src="/assets/reveal/birthday-memory-left.webp"
+              src="/assets/reveal/birthday-memory-left.jpg"
               alt="Kenangan ulang tahun Zayn"
               fill
               sizes="92px"
@@ -73,7 +73,7 @@ export function BirthdayRevealScreen({
 
           <div className="absolute top-[155px] -right-7 size-[92px] overflow-hidden rounded-2xl border-4 border-white shadow-piece">
             <Image
-              src="/assets/reveal/birthday-memory-right.webp"
+              src="/assets/reveal/birthday-memory-right.jpg"
               alt="Kenangan Zayn bersama keluarga"
               fill
               sizes="92px"
@@ -96,7 +96,7 @@ export function BirthdayRevealScreen({
           onClick={onReadLetter}
           className="absolute bottom-8 left-4 min-h-14 w-[358px] rounded-full bg-yellow-500 px-6 text-base font-extrabold text-navy-900 shadow-piece transition-transform active:scale-[0.97]"
         >
-          BACA PESAN DADDY
+          BACA PESAN ABA & UMMA
         </button>
       </section>
     </ScreenShell>
