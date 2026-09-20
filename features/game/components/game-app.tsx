@@ -10,6 +10,7 @@ import { MemoryAgeTwoScreen } from "@/components/screens/memory-age-two-screen";
 import { TeddyPuzzleScreen } from "@/components/screens/teddy-puzzle-screen";
 import { MemoryAgeThreeScreen } from "@/components/screens/memory-age-three-screen";
 import { FinalPuzzleScreen } from "@/components/screens/final-puzzle-screen";
+import { BirthdayRevealScreen } from "@/components/screens/birthday-reveal-screen";
 
 import { SplashScreen } from "@/components/screens/splash-screen";
 
@@ -22,7 +23,8 @@ type GameStage =
   | "teddy-puzzle"
   | "memory-3"
   | "final-puzzle"
-  | "reveal";
+  | "reveal"
+  | "letter";
 
 export function GameApp() {
   const [stage, setStage] = useState<GameStage>("splash");
@@ -59,11 +61,15 @@ export function GameApp() {
     return <FinalPuzzleScreen onReveal={() => setStage("reveal")} />;
   }
 
+  if (stage === "reveal") {
+    return <BirthdayRevealScreen onReadLetter={() => setStage("letter")} />;
+  }
+
   return (
     <ScreenShell className="bg-ocean-100">
       <section className="flex min-h-dvh items-center justify-center px-6 text-center sm:min-h-[844px]">
         <h1 className="text-2xl font-extrabold text-navy-900">
-          Kejutan ulang tahun segera dibuka
+          Pesan dari Daddy segera dibuka
         </h1>
       </section>
     </ScreenShell>
