@@ -10,7 +10,7 @@ describe("DaddyLetterScreen", () => {
 
     expect(
       screen.getByRole("heading", {
-        name: /untuk jagoan kecil daddy/i,
+        name: /Untuk little lego builder Aba & Umma/i,
       }),
     ).toBeInTheDocument();
 

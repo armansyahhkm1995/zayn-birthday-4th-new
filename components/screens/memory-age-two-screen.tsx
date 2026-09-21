@@ -27,14 +27,14 @@ export function MemoryAgeTwoScreen({ onContinue }: MemoryAgeTwoScreenProps) {
           </p>
 
           <h1 className="mt-3 text-[22px] leading-tight font-extrabold">
-            UMUR 2 TAHUN
+            ZAYN LAGI BOBO
           </h1>
         </header>
 
         <figure className="mx-auto mt-[84px] w-[280px] rounded-2xl bg-white p-4 pb-3 shadow-card">
           <Image
-            src="/assets/memories/memory-age-2.jpg"
-            alt="Zayn saat berumur 2 tahun"
+            src="/assets/memories/zayn-lagi-bobo.jpg"
+            alt="Zayn lagi bobo"
             width={248}
             height={200}
             sizes="248px"
@@ -42,7 +42,7 @@ export function MemoryAgeTwoScreen({ onContinue }: MemoryAgeTwoScreenProps) {
           />
 
           <figcaption className="pt-3 text-center text-sm font-bold text-navy-900">
-            Yeay, Zayn sudah 2 tahun di sini 😄
+            Di sini Zayn ketiduran pas kita mau jalan2 abis jumatan 😄
           </figcaption>
         </figure>
 

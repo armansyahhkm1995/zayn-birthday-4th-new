@@ -27,14 +27,14 @@ export function MemoryAgeThreeScreen({
           <p className="text-xs font-extrabold">✨ ADA FOTO ZAYN LAGI ✨</p>
 
           <h1 className="mt-3 text-[22px] leading-tight font-extrabold">
-            UMUR 3 TAHUN
+            ZAYN LAGI BERENANG
           </h1>
         </header>
 
         <figure className="mx-auto mt-[84px] w-[280px] rounded-2xl bg-white p-4 pb-3 shadow-card">
           <Image
-            src="/assets/memories/memory-age-3.jpg"
-            alt="Zayn saat berumur 3 tahun"
+            src="/assets/memories/zayn-lagi-berenang.jpg"
+            alt="Zayn lagi berenang"
             width={248}
             height={200}
             sizes="248px"
@@ -42,7 +42,7 @@ export function MemoryAgeThreeScreen({
           />
 
           <figcaption className="pt-3 text-center text-sm font-bold text-navy-900">
-            Di sini Zayn sudah umur 3 tahun
+            Di sini Zayn lagi berenang sama Aba & Umma di lembah harau
           </figcaption>
         </figure>
 

@@ -166,11 +166,8 @@ export function BirthdayRevealScreen({
 }: BirthdayRevealScreenProps) {
   useEffect(() => {
     void playLoopingSound("birthday");
-
-    return () => {
-      stopSound("birthday");
-    };
   }, []);
+
   return (
     <MotionConfig reducedMotion="user">
       <ScreenShell className="bg-ocean-500">
@@ -295,7 +292,7 @@ export function BirthdayRevealScreen({
               className="absolute top-[155px] -left-7 size-[92px] overflow-hidden rounded-2xl border-4 border-white shadow-piece"
             >
               <Image
-                src="/assets/reveal/birthday-memory-left.jpg"
+                src="/assets/reveal/zayn-umma.jpg"
                 alt="Kenangan ulang tahun Zayn"
                 fill
                 sizes="92px"
@@ -321,7 +318,7 @@ export function BirthdayRevealScreen({
               className="absolute top-[155px] -right-7 size-[92px] overflow-hidden rounded-2xl border-4 border-white shadow-piece"
             >
               <Image
-                src="/assets/reveal/birthday-memory-right.jpg"
+                src="/assets/reveal/zayn-aba.jpg"
                 alt="Kenangan Zayn bersama keluarga"
                 fill
                 sizes="92px"

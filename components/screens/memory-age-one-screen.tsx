@@ -25,14 +25,14 @@ export function MemoryAgeOneScreen({ onContinue }: MemoryAgeOneScreenProps) {
           <p className="text-xs font-extrabold">✨ YEAY KETEMU FOTO ZAYN! ✨</p>
 
           <h1 className="mt-3 text-[22px] leading-tight font-extrabold">
-            UMUR 1 TAHUN
+            ZAYN LAGI BENGONG
           </h1>
         </header>
 
         <figure className="mx-auto mt-[84px] w-[280px] rounded-2xl bg-white p-4 pb-3 shadow-card">
           <Image
-            src="/assets/memories/memory-age-1.jpg"
-            alt="Zayn saat berumur 1 tahun"
+            src="/assets/memories/zayn-lagi-bengong.jpg"
+            alt="Zayn lagi bengong"
             width={248}
             height={200}
             sizes="248px"
@@ -40,7 +40,7 @@ export function MemoryAgeOneScreen({ onContinue }: MemoryAgeOneScreenProps) {
           />
 
           <figcaption className="pt-3 text-center text-sm font-bold text-navy-900">
-            Zayn masih kecil di sini 😄
+            Kita di Bukittinggi ini tapi Zaynnya ngantuk 😄
           </figcaption>
         </figure>
 
