@@ -25,7 +25,7 @@ describe("TeddyPuzzleScreen", () => {
     expect(screen.getByRole("status")).toHaveTextContent(/belum cocok/i);
   });
 
-  it("selesai ketika teddy duduk dipasang", async () => {
+  it("menampilkan completed board untuk teddy duduk", async () => {
     const user = userEvent.setup();
     const onSolved = vi.fn();
 
@@ -43,7 +43,15 @@ describe("TeddyPuzzleScreen", () => {
       }),
     );
 
-    expect(screen.getByRole("status")).toHaveTextContent(/potongannya cocok/i);
+    expect(screen.getByTestId("teddy-board-completed")).toHaveClass(
+      "opacity-100",
+    );
+
+    expect(
+      screen.getByRole("button", {
+        name: /papan puzzle teddy lengkap/i,
+      }),
+    ).toBeDisabled();
 
     await waitFor(
       () => {
