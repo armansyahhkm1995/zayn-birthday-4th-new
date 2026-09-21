@@ -4,7 +4,7 @@ import Image from "next/image";
 import { motion, MotionConfig } from "motion/react";
 import { useEffect } from "react";
 import { ScreenShell } from "@/components/layout/screen-shell";
-import { playLoopingSound, stopSound } from "@/lib/audio";
+import { playLoopingSound } from "@/lib/audio";
 
 type BirthdayRevealScreenProps = {
   onReadLetter: () => void;

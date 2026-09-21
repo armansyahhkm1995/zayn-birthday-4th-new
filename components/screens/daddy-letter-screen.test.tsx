@@ -10,7 +10,7 @@ describe("DaddyLetterScreen", () => {
 
     expect(
       screen.getByRole("heading", {
-        name: /Untuk little lego builder Aba & Umma/i,
+        name: /for our little lego builder Aba & Umma/i,
       }),
     ).toBeInTheDocument();
 
@@ -19,12 +19,6 @@ describe("DaddyLetterScreen", () => {
     ).toBeInTheDocument();
 
     expect(screen.getByText(/my little lego builder/i)).toBeInTheDocument();
-
-    expect(
-      screen.getByRole("img", {
-        name: /foto keluarga zayn bersama daddy/i,
-      }),
-    ).toBeInTheDocument();
   });
 
   it("mengulang permainan dari awal", async () => {

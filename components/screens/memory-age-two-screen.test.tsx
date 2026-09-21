@@ -15,7 +15,7 @@ describe("MemoryAgeTwoScreen", () => {
     ).toBeInTheDocument();
 
     expect(
-      screen.getByRole("image", {
+      screen.getByRole("img", {
         name: /Zayn lagi bobo/i,
       }),
     ).toBeInTheDocument();

@@ -32,7 +32,7 @@ describe("GameApp", () => {
       await screen.findByRole(
         "heading",
         {
-          name: /umur 1 tahun/i,
+          name: /zayn lagi bengong/i,
         },
         {
           timeout: 1500,
