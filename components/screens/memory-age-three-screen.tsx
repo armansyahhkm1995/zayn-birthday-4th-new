@@ -14,7 +14,7 @@ export function MemoryAgeThreeScreen({
   return (
     <ScreenShell className="bg-ocean-500">
       <Image
-        src="/assets/backgrounds/underwater-content.png"
+        src="/assets/backgrounds/underwater-content.webp"
         alt=""
         fill
         priority
@@ -33,7 +33,7 @@ export function MemoryAgeThreeScreen({
 
         <figure className="mx-auto mt-[84px] w-[280px] rounded-2xl bg-white p-4 pb-3 shadow-card">
           <Image
-            src="/assets/memories/zayn-lagi-berenang.jpg"
+            src="/assets/memories/zayn-lagi-berenang.webp"
             alt="Zayn lagi berenang"
             width={248}
             height={200}

@@ -12,32 +12,32 @@ const puzzlePieces = [
   {
     id: "p01",
     label: "Keping 1",
-    image: "/assets/puzzles/final/final-piece-01.png",
+    image: "/assets/puzzles/final/final-piece-01.webp",
   },
   {
     id: "p02",
     label: "Keping 2",
-    image: "/assets/puzzles/final/final-piece-02.png",
+    image: "/assets/puzzles/final/final-piece-02.webp",
   },
   {
     id: "p03",
     label: "Keping 3",
-    image: "/assets/puzzles/final/final-piece-03.png",
+    image: "/assets/puzzles/final/final-piece-03.webp",
   },
   {
     id: "p04",
     label: "Keping 4",
-    image: "/assets/puzzles/final/final-piece-04.png",
+    image: "/assets/puzzles/final/final-piece-04.webp",
   },
   {
     id: "p05",
     label: "Keping 5",
-    image: "/assets/puzzles/final/final-piece-05.png",
+    image: "/assets/puzzles/final/final-piece-05.webp",
   },
   {
     id: "p06",
     label: "Keping 6",
-    image: "/assets/puzzles/final/final-piece-06.png",
+    image: "/assets/puzzles/final/final-piece-06.webp",
   },
 ] as const;
 
@@ -53,14 +53,14 @@ function getBoardState(pieceIds: PieceId[]) {
   if (sortedPieces.length === 0) {
     return {
       id: "empty",
-      image: "/assets/puzzles/final/final-board-empty.png",
+      image: "/assets/puzzles/final/final-board-empty.webp",
     };
   }
 
   if (sortedPieces.length === puzzlePieces.length) {
     return {
       id: "complete",
-      image: "/assets/puzzles/final/final-board-complete.png",
+      image: "/assets/puzzles/final/final-board-complete.webp",
     };
   }
 
@@ -68,7 +68,7 @@ function getBoardState(pieceIds: PieceId[]) {
 
   return {
     id: suffix,
-    image: `/assets/puzzles/final/final-board-${suffix}.png`,
+    image: `/assets/puzzles/final/final-board-${suffix}.webp`,
   };
 }
 
@@ -242,7 +242,7 @@ export function FinalPuzzleScreen({ onReveal }: FinalPuzzleScreenProps) {
   return (
     <ScreenShell className="bg-ocean-500">
       <Image
-        src="/assets/backgrounds/underwater-content.png"
+        src="/assets/backgrounds/underwater-content.webp"
         alt=""
         fill
         priority

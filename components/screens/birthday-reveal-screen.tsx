@@ -172,7 +172,7 @@ export function BirthdayRevealScreen({
     <MotionConfig reducedMotion="user">
       <ScreenShell className="bg-ocean-500">
         <Image
-          src="/assets/backgrounds/underwater-content.png"
+          src="/assets/backgrounds/underwater-content.webp"
           alt=""
           fill
           priority
@@ -265,7 +265,7 @@ export function BirthdayRevealScreen({
               }}
             >
               <Image
-                src="/assets/reveal/birthday-hero.png"
+                src="/assets/reveal/birthday-hero.webp"
                 alt="Zayn tersenyum di depan kue ulang tahun"
                 fill
                 priority
@@ -292,7 +292,7 @@ export function BirthdayRevealScreen({
               className="absolute top-[155px] -left-7 size-[92px] overflow-hidden rounded-2xl border-4 border-white shadow-piece"
             >
               <Image
-                src="/assets/reveal/zayn-umma.jpg"
+                src="/assets/reveal/zayn-umma.webp"
                 alt="Kenangan ulang tahun Zayn"
                 fill
                 sizes="92px"
@@ -318,7 +318,7 @@ export function BirthdayRevealScreen({
               className="absolute top-[155px] -right-7 size-[92px] overflow-hidden rounded-2xl border-4 border-white shadow-piece"
             >
               <Image
-                src="/assets/reveal/zayn-aba.jpg"
+                src="/assets/reveal/zayn-aba.webp"
                 alt="Kenangan Zayn bersama keluarga"
                 fill
                 sizes="92px"

@@ -153,7 +153,7 @@ export function DaddyLetterScreen({ onReplay }: DaddyLetterScreenProps) {
     <MotionConfig reducedMotion="user">
       <ScreenShell className="bg-ocean-500">
         <Image
-          src="/assets/backgrounds/underwater-content.png"
+          src="/assets/backgrounds/underwater-content.webp"
           alt=""
           fill
           priority
@@ -254,8 +254,8 @@ export function DaddyLetterScreen({ onReplay }: DaddyLetterScreenProps) {
 
             <figure className="relative h-[150px] overflow-hidden rounded-xl">
               <Image
-                src="/assets/reveal/our-family.jpeg"
-                alt="Foto keluarga Zayn bersama Daddy"
+                src="/assets/reveal/our-family.webp"
+                alt="Foto keluarga kita"
                 fill
                 sizes="262px"
                 className="object-cover object-[center_35%]"

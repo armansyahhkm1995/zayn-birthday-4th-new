@@ -12,17 +12,17 @@ const puzzlePieces = [
   {
     id: "octopus",
     label: "Gurita",
-    image: "/assets/puzzles/beach/beach-piece-octopus.png",
+    image: "/assets/puzzles/beach/beach-piece-octopus.webp",
   },
   {
     id: "whale",
     label: "Anak paus",
-    image: "/assets/puzzles/beach/beach-piece-whale.png",
+    image: "/assets/puzzles/beach/beach-piece-whale.webp",
   },
   {
     id: "seaweed",
     label: "Rumput laut",
-    image: "/assets/puzzles/beach/beach-piece-seaweed.png",
+    image: "/assets/puzzles/beach/beach-piece-seaweed.webp",
   },
 ] as const;
 
@@ -157,7 +157,7 @@ export function BeachPuzzleScreen({ onSolved }: BeachPuzzleScreenProps) {
   return (
     <ScreenShell className="bg-ocean-500">
       <Image
-        src="/assets/backgrounds/underwater-content.png"
+        src="/assets/backgrounds/underwater-content.webp"
         alt=""
         fill
         priority
@@ -190,7 +190,7 @@ export function BeachPuzzleScreen({ onSolved }: BeachPuzzleScreenProps) {
           >
             <span className="relative block aspect-[295/207] w-full overflow-hidden rounded-lg">
               <Image
-                src="/assets/puzzles/beach/beach-board.png"
+                src="/assets/puzzles/beach/beach-board.webp"
                 alt=""
                 fill
                 priority
@@ -202,7 +202,7 @@ export function BeachPuzzleScreen({ onSolved }: BeachPuzzleScreenProps) {
 
               <Image
                 data-testid="beach-board-completed"
-                src="/assets/puzzles/beach/beach-board-completed.png"
+                src="/assets/puzzles/beach/beach-board-completed.webp"
                 alt=""
                 fill
                 priority

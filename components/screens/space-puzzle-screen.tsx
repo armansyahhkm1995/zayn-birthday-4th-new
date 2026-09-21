@@ -11,52 +11,52 @@ const puzzlePieces = [
   {
     id: "dad",
     label: "Paus Aba",
-    image: "/assets/puzzles/space/space-piece-dad-whale.png",
+    image: "/assets/puzzles/space/space-piece-dad-whale.webp",
   },
   {
     id: "mom",
     label: "Paus Umma",
-    image: "/assets/puzzles/space/space-piece-mom-whale.png",
+    image: "/assets/puzzles/space/space-piece-mom-whale.webp",
   },
   {
     id: "son",
     label: "Paus Zayn",
-    image: "/assets/puzzles/space/space-piece-son-whale.png",
+    image: "/assets/puzzles/space/space-piece-son-whale.webp",
   },
 ] as const;
 
 const boardImages = [
   {
     id: "empty",
-    image: "/assets/puzzles/space/space-board.png",
+    image: "/assets/puzzles/space/space-board.webp",
   },
   {
     id: "aba",
-    image: "/assets/puzzles/space/space-board-completed-aba.png",
+    image: "/assets/puzzles/space/space-board-completed-aba.webp",
   },
   {
     id: "umma",
-    image: "/assets/puzzles/space/space-board-completed-umma.png",
+    image: "/assets/puzzles/space/space-board-completed-umma.webp",
   },
   {
     id: "zayn",
-    image: "/assets/puzzles/space/space-board-completed-zayn.png",
+    image: "/assets/puzzles/space/space-board-completed-zayn.webp",
   },
   {
     id: "aba-umma",
-    image: "/assets/puzzles/space/space-board-completed-aba-umma.png",
+    image: "/assets/puzzles/space/space-board-completed-aba-umma.webp",
   },
   {
     id: "aba-zayn",
-    image: "/assets/puzzles/space/space-board-completed-aba-zayn.png",
+    image: "/assets/puzzles/space/space-board-completed-aba-zayn.webp",
   },
   {
     id: "umma-zayn",
-    image: "/assets/puzzles/space/space-board-completed-umma-zayn.png",
+    image: "/assets/puzzles/space/space-board-completed-umma-zayn.webp",
   },
   {
     id: "all",
-    image: "/assets/puzzles/space/space-board-completed-all.png",
+    image: "/assets/puzzles/space/space-board-completed-all.webp",
   },
 ] as const;
 
@@ -231,7 +231,7 @@ export function SpacePuzzleScreen({ onSolved }: SpacePuzzleScreenProps) {
   return (
     <ScreenShell className="bg-ocean-500">
       <Image
-        src="/assets/backgrounds/underwater-content.png"
+        src="/assets/backgrounds/underwater-content.webp"
         alt=""
         fill
         priority

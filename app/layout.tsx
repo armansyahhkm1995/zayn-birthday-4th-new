@@ -26,7 +26,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body className={`${outfit.className} min-h-dvh antialiased`}>
         <div className="relative min-h-dvh">
           <Image
-            src="/assets/backgrounds/underwater-splash.png"
+            src="/assets/backgrounds/underwater-splash.webp"
             alt=""
             fill
             priority

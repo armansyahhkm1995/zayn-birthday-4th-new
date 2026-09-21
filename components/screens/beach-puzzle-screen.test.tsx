@@ -106,7 +106,7 @@ describe("BeachPuzzleScreen", () => {
     expect(completedBoard).toHaveClass("opacity-100");
 
     expect(completedBoard.getAttribute("src")).toContain(
-      "beach-board-completed.png",
+      "beach-board-completed.webp",
     );
 
     expect(

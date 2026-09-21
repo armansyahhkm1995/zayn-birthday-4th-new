@@ -12,17 +12,17 @@ const puzzlePieces = [
   {
     id: "sitting",
     label: "Teddy duduk",
-    image: "/assets/puzzles/teddy/teddy-piece-sitting.png",
+    image: "/assets/puzzles/teddy/teddy-piece-sitting.webp",
   },
   {
     id: "waving",
     label: "Teddy melambaikan tangan",
-    image: "/assets/puzzles/teddy/teddy-piece-waving.png",
+    image: "/assets/puzzles/teddy/teddy-piece-waving.webp",
   },
   {
     id: "cheering",
     label: "Teddy bersorak",
-    image: "/assets/puzzles/teddy/teddy-piece-cheering.png",
+    image: "/assets/puzzles/teddy/teddy-piece-cheering.webp",
   },
 ] as const;
 
@@ -153,7 +153,7 @@ export function TeddyPuzzleScreen({ onSolved }: TeddyPuzzleScreenProps) {
   return (
     <ScreenShell className="bg-ocean-500">
       <Image
-        src="/assets/backgrounds/underwater-content.png"
+        src="/assets/backgrounds/underwater-content.webp"
         alt=""
         fill
         priority
@@ -186,7 +186,7 @@ export function TeddyPuzzleScreen({ onSolved }: TeddyPuzzleScreenProps) {
           >
             <span className="relative block aspect-[314/280] w-full overflow-hidden rounded-lg">
               <Image
-                src="/assets/puzzles/teddy/teddy-board.png"
+                src="/assets/puzzles/teddy/teddy-board.webp"
                 alt=""
                 fill
                 priority
@@ -198,7 +198,7 @@ export function TeddyPuzzleScreen({ onSolved }: TeddyPuzzleScreenProps) {
 
               <Image
                 data-testid="teddy-board-completed"
-                src="/assets/puzzles/teddy/teddy-board-completed.png"
+                src="/assets/puzzles/teddy/teddy-board-completed.webp"
                 alt=""
                 fill
                 priority

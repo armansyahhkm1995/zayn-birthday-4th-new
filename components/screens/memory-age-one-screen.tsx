@@ -12,7 +12,7 @@ export function MemoryAgeOneScreen({ onContinue }: MemoryAgeOneScreenProps) {
   return (
     <ScreenShell className="bg-ocean-500">
       <Image
-        src="/assets/backgrounds/underwater-content.png"
+        src="/assets/backgrounds/underwater-content.webp"
         alt=""
         fill
         priority
@@ -31,7 +31,7 @@ export function MemoryAgeOneScreen({ onContinue }: MemoryAgeOneScreenProps) {
 
         <figure className="mx-auto mt-[84px] w-[280px] rounded-2xl bg-white p-4 pb-3 shadow-card">
           <Image
-            src="/assets/memories/zayn-lagi-bengong.jpg"
+            src="/assets/memories/zayn-lagi-bengong.webp"
             alt="Zayn lagi bengong"
             width={248}
             height={200}
