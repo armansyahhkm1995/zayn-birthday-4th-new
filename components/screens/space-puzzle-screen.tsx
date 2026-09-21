@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { motion, type PanInfo } from "motion/react";
-
+import { playSound } from "@/lib/audio";
 import { ScreenShell } from "@/components/layout/screen-shell";
 import { isPointInsideRect } from "@/features/puzzle/is-point-inside-rect";
 
@@ -131,6 +131,8 @@ export function SpacePuzzleScreen({ onSolved }: SpacePuzzleScreenProps) {
   function placePiece(pieceId: PieceId) {
     if (placedPieces.includes(pieceId)) return;
 
+    playSound("correct");
+
     setPlacedPieces((currentPieces) => [...currentPieces, pieceId]);
 
     setSelectedPiece(null);
@@ -181,10 +183,25 @@ export function SpacePuzzleScreen({ onSolved }: SpacePuzzleScreenProps) {
       24,
     );
 
+    if (!droppedOnTarget) {
+      playSound("wrong");
+
+      setWrongPiece(pieceId);
+      setSelectedPiece(null);
+      setLastPlaced(null);
+      return;
+    }
+
+    setWrongPiece(pieceId);
+    setSelectedPiece(null);
+    setLastPlaced(null);
+
     if (droppedOnTarget) {
       placePiece(pieceId);
       return;
     }
+
+    playSound("wrong");
 
     setWrongPiece(pieceId);
     setSelectedPiece(null);

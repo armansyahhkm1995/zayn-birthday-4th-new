@@ -1,8 +1,13 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
+import { playSound } from "@/lib/audio";
 
 import { SpacePuzzleScreen } from "./space-puzzle-screen";
+
+vi.mock("@/lib/audio", () => ({
+  playSound: vi.fn(),
+}));
 
 describe("SpacePuzzleScreen", () => {
   it("menampilkan tiga anggota keluarga paus", () => {
@@ -55,6 +60,10 @@ describe("SpacePuzzleScreen", () => {
     expect(screen.getByTestId("space-board-umma-zayn")).toHaveClass(
       "opacity-100",
     );
+
+    expect(vi.mocked(playSound)).toHaveBeenCalledWith("correct");
+
+    expect(vi.mocked(playSound)).toHaveBeenCalledTimes(2);
   });
 
   it("selesai setelah ketiga paus terpasang", async () => {

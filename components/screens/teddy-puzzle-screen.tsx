@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { motion, type PanInfo } from "motion/react";
+import { playSound } from "@/lib/audio";
 
 import { ScreenShell } from "@/components/layout/screen-shell";
 import { isPointInsideRect } from "@/features/puzzle/is-point-inside-rect";
@@ -75,11 +76,15 @@ export function TeddyPuzzleScreen({ onSolved }: TeddyPuzzleScreenProps) {
 
   function validatePiece(pieceId: PieceId) {
     if (pieceId === "sitting") {
+      playSound("correct");
+
       setWrongPiece(null);
       setSelectedPiece(pieceId);
       setStatus("correct");
       return;
     }
+
+    playSound("wrong");
 
     setWrongPiece(pieceId);
     setSelectedPiece(null);
@@ -118,6 +123,8 @@ export function TeddyPuzzleScreen({ onSolved }: TeddyPuzzleScreenProps) {
     );
 
     if (!droppedOnTarget) {
+      playSound("wrong");
+
       setWrongPiece(pieceId);
       setSelectedPiece(null);
       setStatus("wrong");
