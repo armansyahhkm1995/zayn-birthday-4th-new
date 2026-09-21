@@ -35,6 +35,27 @@ type BeachPuzzleScreenProps = {
 };
 
 export function BeachPuzzleScreen({ onSolved }: BeachPuzzleScreenProps) {
+  function markAsWrong(pieceId: PieceId) {
+    playSound("wrong");
+
+    setWrongPiece(pieceId);
+    setSelectedPiece(null);
+    setStatus("wrong");
+  }
+
+  function validatePiece(pieceId: PieceId) {
+    if (pieceId === "whale") {
+      playSound("correct");
+
+      setWrongPiece(null);
+      setSelectedPiece(pieceId);
+      setStatus("correct");
+      return;
+    }
+
+    markAsWrong(pieceId);
+  }
+
   const [selectedPiece, setSelectedPiece] = useState<PieceId | null>(null);
 
   const [status, setStatus] = useState<PuzzleStatus>("idle");
@@ -81,16 +102,7 @@ export function BeachPuzzleScreen({ onSolved }: BeachPuzzleScreenProps) {
       return;
     }
 
-    if (selectedPiece === "whale") {
-      setWrongPiece(null);
-      playSound("correct");
-      setStatus("correct");
-      return;
-    }
-    setWrongPiece(selectedPiece);
-    setSelectedPiece(null);
-    playSound("wrong");
-    setStatus("wrong");
+    validatePiece(selectedPiece);
   }
 
   function handleDragStart(pieceId: PieceId) {
@@ -119,22 +131,11 @@ export function BeachPuzzleScreen({ onSolved }: BeachPuzzleScreenProps) {
     );
 
     if (!droppedOnTarget) {
-      setWrongPiece(pieceId);
-      setSelectedPiece(null);
-      setStatus("wrong");
+      markAsWrong(pieceId);
       return;
     }
 
-    if (pieceId === "whale") {
-      setWrongPiece(null);
-      setSelectedPiece(pieceId);
-      setStatus("correct");
-      return;
-    }
-
-    setWrongPiece(pieceId);
-    setSelectedPiece(null);
-    setStatus("wrong");
+    validatePiece(pieceId);
   }
 
   const feedbackMessage = {

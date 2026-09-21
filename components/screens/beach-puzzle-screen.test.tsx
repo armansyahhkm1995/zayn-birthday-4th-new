@@ -1,8 +1,13 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import { BeachPuzzleScreen } from "./beach-puzzle-screen";
+import { playSound } from "@/lib/audio";
+
+vi.mock("@/lib/audio", () => ({
+  playSound: vi.fn(),
+}));
 
 describe("BeachPuzzleScreen", () => {
   it("menampilkan target dan tiga pilihan", () => {
@@ -52,6 +57,8 @@ describe("BeachPuzzleScreen", () => {
       name: /pasang potongan ke papan puzzle/i,
     });
 
+    const mockedPlaySound = vi.mocked(playSound);
+
     await user.click(octopus);
 
     expect(octopus).toHaveAttribute("aria-pressed", "true");
@@ -63,6 +70,10 @@ describe("BeachPuzzleScreen", () => {
     expect(screen.getByRole("status")).toHaveTextContent(/belum tepat/i);
 
     expect(target).toBeDisabled();
+
+    expect(playSound).toHaveBeenCalledWith("wrong");
+
+    expect(mockedPlaySound).toHaveBeenCalledWith("wrong");
   });
 
   it("mengunci puzzle jika anak paus dipilih", async () => {
@@ -77,6 +88,8 @@ describe("BeachPuzzleScreen", () => {
     const target = screen.getByRole("button", {
       name: /pasang potongan ke papan puzzle/i,
     });
+
+    const mockedPlaySound = vi.mocked(playSound);
 
     await user.click(whale);
     await user.click(target);
@@ -101,5 +114,9 @@ describe("BeachPuzzleScreen", () => {
         name: /papan puzzle keluarga paus lengkap/i,
       }),
     ).toBeDisabled();
+
+    expect(playSound).toHaveBeenCalledWith("correct");
+
+    expect(mockedPlaySound).toHaveBeenCalledWith("correct");
   });
 });
