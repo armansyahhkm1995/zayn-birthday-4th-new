@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useGlobalInteractionSound } from "@/hooks/use-global-interaction-sound";
 
 import { BeachPuzzleScreen } from "@/components/screens/beach-puzzle-screen";
 import { MemoryAgeOneScreen } from "@/components/screens/memory-age-one-screen";
@@ -27,6 +28,8 @@ type GameStage =
   | "letter";
 
 export function GameApp() {
+  useGlobalInteractionSound();
+
   const [stage, setStage] = useState<GameStage>("splash");
 
   if (stage === "splash") {

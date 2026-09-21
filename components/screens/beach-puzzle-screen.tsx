@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { motion, type PanInfo } from "motion/react";
 import { isPointInsideRect } from "@/features/puzzle/is-point-inside-rect";
+import { playSound } from "@/lib/audio";
 
 import { ScreenShell } from "@/components/layout/screen-shell";
 
@@ -82,11 +83,13 @@ export function BeachPuzzleScreen({ onSolved }: BeachPuzzleScreenProps) {
 
     if (selectedPiece === "whale") {
       setWrongPiece(null);
+      playSound("correct");
       setStatus("correct");
       return;
     }
     setWrongPiece(selectedPiece);
     setSelectedPiece(null);
+    playSound("wrong");
     setStatus("wrong");
   }
 
