@@ -8,6 +8,7 @@ import { FinalPuzzleScreen } from "./final-puzzle-screen";
 
 vi.mock("@/lib/audio", () => ({
   playSound: vi.fn(),
+  playLoopingSound: vi.fn().mockResolvedValue(true),
 }));
 
 describe("FinalPuzzleScreen", () => {

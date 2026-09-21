@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useRef, useState } from "react";
 import { motion, type PanInfo } from "motion/react";
-import { playSound } from "@/lib/audio";
+import { playSound, playLoopingSound } from "@/lib/audio";
 
 import { ScreenShell } from "@/components/layout/screen-shell";
 import { isPointInsideRect } from "@/features/puzzle/is-point-inside-rect";
@@ -234,6 +234,11 @@ export function FinalPuzzleScreen({ onReveal }: FinalPuzzleScreenProps) {
     return "Yuk kita susun puzzlenya satu satu";
   }
 
+  function handleReveal() {
+    void playLoopingSound("birthday");
+    onReveal();
+  }
+
   return (
     <ScreenShell className="bg-ocean-500">
       <Image
@@ -315,13 +320,13 @@ export function FinalPuzzleScreen({ onReveal }: FinalPuzzleScreenProps) {
           </p>
 
           {isCompleted ? (
-            <button
+            <motion.button
               type="button"
-              onClick={onReveal}
+              onClick={handleReveal}
               className="min-h-16 w-full rounded-full bg-yellow-500 px-6 text-base font-extrabold text-navy-900 shadow-piece transition-transform active:scale-[0.97]"
             >
               LIHAT KEJUTANNYA
-            </button>
+            </motion.button>
           ) : (
             <ul
               aria-label="Keping puzzle terakhir"

@@ -1,10 +1,16 @@
-export type SoundName = "splash" | "interaction" | "wrong" | "correct";
+export type SoundName =
+  | "splash"
+  | "interaction"
+  | "wrong"
+  | "correct"
+  | "birthday";
 
 const soundSources: Record<SoundName, string> = {
   splash: "/assets/audio/splash-screen-sound.mp3",
   interaction: "/assets/audio/interaction-sound.mp3",
   wrong: "/assets/audio/wrong-answer-sound.mp3",
   correct: "/assets/audio/correct-answer-sound.mp3",
+  birthday: "/assets/audio/birthday-song.mp3",
 };
 
 const soundVolumes: Record<SoundName, number> = {
@@ -12,6 +18,7 @@ const soundVolumes: Record<SoundName, number> = {
   interaction: 0.35,
   wrong: 0.5,
   correct: 0.55,
+  birthday: 0.6,
 };
 
 const audioCache = new Map<SoundName, HTMLAudioElement>();
@@ -38,7 +45,13 @@ function getAudio(name: SoundName) {
 }
 
 export function preloadSounds() {
-  const sounds: SoundName[] = ["splash", "interaction", "wrong", "correct"];
+  const sounds: SoundName[] = [
+    "splash",
+    "interaction",
+    "wrong",
+    "correct",
+    "birthday",
+  ];
 
   sounds.forEach((sound) => {
     getAudio(sound)?.load();
@@ -73,9 +86,15 @@ export async function playLoopingSound(name: SoundName) {
   if (!audio) return false;
 
   try {
-    audio.pause();
-    audio.currentTime = 0;
+    if (!audio.paused && audio.loop) {
+      return true;
+    }
+
     audio.loop = true;
+
+    if (audio.ended) {
+      audio.currentTime = 0;
+    }
 
     await audio.play();
 
