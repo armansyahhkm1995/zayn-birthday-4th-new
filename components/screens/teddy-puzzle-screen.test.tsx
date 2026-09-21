@@ -1,65 +1,80 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
-import { TeddyPuzzleScreen } from "./teddy-puzzle-screen";
+import { FinalPuzzleScreen } from "./final-puzzle-screen";
 
-describe("TeddyPuzzleScreen", () => {
-  it("memberikan feedback untuk teddy yang salah", async () => {
-    const user = userEvent.setup();
+describe("FinalPuzzleScreen", () => {
+  it("menampilkan enam keping puzzle", () => {
+    render(<FinalPuzzleScreen onReveal={() => undefined} />);
 
-    render(<TeddyPuzzleScreen onSolved={() => undefined} />);
-
-    await user.click(
-      screen.getByRole("button", {
-        name: /pilih teddy melambaikan tangan/i,
-      }),
-    );
-
-    await user.click(
-      screen.getByRole("button", {
-        name: /pasang teddy ke papan puzzle/i,
-      }),
-    );
-
-    expect(screen.getByRole("status")).toHaveTextContent(/belum cocok/i);
+    for (let piece = 1; piece <= 6; piece += 1) {
+      expect(
+        screen.getByRole("button", {
+          name: new RegExp(`pilih keping ${piece}`, "i"),
+        }),
+      ).toBeInTheDocument();
+    }
   });
 
-  it("menampilkan completed board untuk teddy duduk", async () => {
+  it("menggunakan board sesuai kombinasi", async () => {
     const user = userEvent.setup();
-    const onSolved = vi.fn();
 
-    render(<TeddyPuzzleScreen onSolved={onSolved} />);
+    render(<FinalPuzzleScreen onReveal={() => undefined} />);
 
-    await user.click(
-      screen.getByRole("button", {
-        name: /pilih teddy duduk/i,
-      }),
-    );
+    const target = screen.getByRole("button", {
+      name: /pasang keping ke papan puzzle terakhir/i,
+    });
 
     await user.click(
       screen.getByRole("button", {
-        name: /pasang teddy ke papan puzzle/i,
+        name: /pilih keping 2/i,
       }),
     );
+    await user.click(target);
 
-    expect(screen.getByTestId("teddy-board-completed")).toHaveClass(
+    await user.click(
+      screen.getByRole("button", {
+        name: /pilih keping 5/i,
+      }),
+    );
+    await user.click(target);
+
+    expect(screen.getByTestId("final-board-p02-p05")).toHaveClass(
+      "opacity-100",
+    );
+  });
+
+  it("menampilkan kejutan setelah lengkap", async () => {
+    const user = userEvent.setup();
+    const onReveal = vi.fn();
+
+    render(<FinalPuzzleScreen onReveal={onReveal} />);
+
+    const target = screen.getByRole("button", {
+      name: /pasang keping ke papan puzzle terakhir/i,
+    });
+
+    for (let piece = 1; piece <= 6; piece += 1) {
+      await user.click(
+        screen.getByRole("button", {
+          name: new RegExp(`pilih keping ${piece}`, "i"),
+        }),
+      );
+
+      await user.click(target);
+    }
+
+    expect(screen.getByTestId("final-board-complete")).toHaveClass(
       "opacity-100",
     );
 
-    expect(
+    await user.click(
       screen.getByRole("button", {
-        name: /papan puzzle teddy lengkap/i,
+        name: /lihat kejutannya/i,
       }),
-    ).toBeDisabled();
-
-    await waitFor(
-      () => {
-        expect(onSolved).toHaveBeenCalledOnce();
-      },
-      {
-        timeout: 1500,
-      },
     );
+
+    expect(onReveal).toHaveBeenCalledOnce();
   });
 });
