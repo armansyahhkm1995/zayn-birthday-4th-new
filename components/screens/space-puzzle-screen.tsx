@@ -1,52 +1,107 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { motion, type PanInfo } from "motion/react";
 
 import { ScreenShell } from "@/components/layout/screen-shell";
+import { isPointInsideRect } from "@/features/puzzle/is-point-inside-rect";
 
 const puzzlePieces = [
   {
-    id: "star-whale",
-    label: "Paus bintang",
+    id: "dad",
+    label: "Paus Aba",
     image: "/assets/puzzles/space/space-piece-dad-whale.png",
-    placement: "left-[4%] top-[2%] h-[82px] w-[130px]",
   },
   {
-    id: "planet-whale",
-    label: "Paus planet",
+    id: "mom",
+    label: "Paus Umma",
     image: "/assets/puzzles/space/space-piece-mom-whale.png",
-    placement: "left-[14%] top-[43%] h-[82px] w-[110px]",
   },
   {
-    id: "wing-whale",
-    label: "Paus bersayap",
+    id: "son",
+    label: "Paus Zayn",
     image: "/assets/puzzles/space/space-piece-son-whale.png",
-    placement: "right-[8%] top-[48%] h-[78px] w-[100px]",
+  },
+] as const;
+
+const boardImages = [
+  {
+    id: "empty",
+    image: "/assets/puzzles/space/space-board.png",
+  },
+  {
+    id: "aba",
+    image: "/assets/puzzles/space/space-board-completed-aba.png",
+  },
+  {
+    id: "umma",
+    image: "/assets/puzzles/space/space-board-completed-umma.png",
+  },
+  {
+    id: "zayn",
+    image: "/assets/puzzles/space/space-board-completed-zayn.png",
+  },
+  {
+    id: "aba-umma",
+    image: "/assets/puzzles/space/space-board-completed-aba-umma.png",
+  },
+  {
+    id: "aba-zayn",
+    image: "/assets/puzzles/space/space-board-completed-aba-zayn.png",
+  },
+  {
+    id: "umma-zayn",
+    image: "/assets/puzzles/space/space-board-completed-umma-zayn.png",
+  },
+  {
+    id: "all",
+    image: "/assets/puzzles/space/space-board-completed-all.png",
   },
 ] as const;
 
 type PieceId = (typeof puzzlePieces)[number]["id"];
+type BoardId = (typeof boardImages)[number]["id"];
 
 type SpacePuzzleScreenProps = {
   onSolved: () => void;
 };
 
+function getBoardId(placedPieces: PieceId[]): BoardId {
+  const hasDad = placedPieces.includes("dad");
+  const hasMom = placedPieces.includes("mom");
+  const hasSon = placedPieces.includes("son");
+
+  if (hasDad && hasMom && hasSon) return "all";
+  if (hasDad && hasMom) return "aba-umma";
+  if (hasDad && hasSon) return "aba-zayn";
+  if (hasMom && hasSon) return "umma-zayn";
+  if (hasDad) return "aba";
+  if (hasMom) return "umma";
+  if (hasSon) return "zayn";
+
+  return "empty";
+}
+
 export function SpacePuzzleScreen({ onSolved }: SpacePuzzleScreenProps) {
   const [selectedPiece, setSelectedPiece] = useState<PieceId | null>(null);
 
+  const [wrongPiece, setWrongPiece] = useState<PieceId | null>(null);
+
+  const [lastPlaced, setLastPlaced] = useState<PieceId | null>(null);
+
   const [placedPieces, setPlacedPieces] = useState<PieceId[]>([]);
+
+  const dadTargetRef = useRef<HTMLSpanElement>(null);
+  const momTargetRef = useRef<HTMLSpanElement>(null);
+  const sonTargetRef = useRef<HTMLSpanElement>(null);
 
   const isCompleted = placedPieces.length === puzzlePieces.length;
 
-  const selectedPieceData = puzzlePieces.find(
-    (piece) => piece.id === selectedPiece,
-  );
+  const activeBoardId = getBoardId(placedPieces);
 
   useEffect(() => {
-    if (!isCompleted) {
-      return;
-    }
+    if (!isCompleted) return;
 
     const timeoutId = window.setTimeout(() => {
       onSolved();
@@ -57,10 +112,39 @@ export function SpacePuzzleScreen({ onSolved }: SpacePuzzleScreenProps) {
     };
   }, [isCompleted, onSolved]);
 
+  function getTargetElement(pieceId: PieceId) {
+    if (pieceId === "dad") {
+      return dadTargetRef.current;
+    }
+
+    if (pieceId === "mom") {
+      return momTargetRef.current;
+    }
+
+    return sonTargetRef.current;
+  }
+
+  function getPieceLabel(pieceId: PieceId | null) {
+    return puzzlePieces.find((piece) => piece.id === pieceId)?.label;
+  }
+
+  function placePiece(pieceId: PieceId) {
+    if (placedPieces.includes(pieceId)) return;
+
+    setPlacedPieces((currentPieces) => [...currentPieces, pieceId]);
+
+    setSelectedPiece(null);
+    setWrongPiece(null);
+    setLastPlaced(pieceId);
+  }
+
   function handlePieceSelect(pieceId: PieceId) {
     if (isCompleted || placedPieces.includes(pieceId)) {
       return;
     }
+
+    setWrongPiece(null);
+    setLastPlaced(null);
 
     setSelectedPiece((currentPiece) =>
       currentPiece === pieceId ? null : pieceId,
@@ -68,20 +152,64 @@ export function SpacePuzzleScreen({ onSolved }: SpacePuzzleScreenProps) {
   }
 
   function handleTargetSelect() {
-    if (!selectedPiece || isCompleted) {
+    if (!selectedPiece || isCompleted) return;
+
+    placePiece(selectedPiece);
+  }
+
+  function handleDragStart(pieceId: PieceId) {
+    if (isCompleted || placedPieces.includes(pieceId)) {
       return;
     }
 
-    setPlacedPieces([...placedPieces, selectedPiece]);
-
-    setSelectedPiece(null);
+    setWrongPiece(null);
+    setLastPlaced(null);
+    setSelectedPiece(pieceId);
   }
 
-  const feedbackMessage = isCompleted
-    ? "Semua keluarga paus sudah terpasang!"
-    : selectedPieceData
-      ? `${selectedPieceData.label} dipilih. Ketuk papan puzzle.`
-      : "Masukin satu satu sesuai tempatnya ya";
+  function handleDragEnd(pieceId: PieceId, info: PanInfo) {
+    const target = getTargetElement(pieceId);
+
+    if (!target) {
+      setSelectedPiece(null);
+      return;
+    }
+
+    const droppedOnTarget = isPointInsideRect(
+      info.point,
+      target.getBoundingClientRect(),
+      24,
+    );
+
+    if (droppedOnTarget) {
+      placePiece(pieceId);
+      return;
+    }
+
+    setWrongPiece(pieceId);
+    setSelectedPiece(null);
+    setLastPlaced(null);
+  }
+
+  function getFeedbackMessage() {
+    if (isCompleted) {
+      return "Semua keluarga paus sudah terpasang!";
+    }
+
+    if (wrongPiece) {
+      return `${getPieceLabel(wrongPiece)} belum pas. Coba lagi ya!`;
+    }
+
+    if (selectedPiece) {
+      return `${getPieceLabel(selectedPiece)} dipilih. Ketuk atau lepaskan di lubangnya.`;
+    }
+
+    if (lastPlaced) {
+      return `${getPieceLabel(lastPlaced)} sudah terpasang!`;
+    }
+
+    return "Masukin satu satu sesuai tempatnya ya";
+  }
 
   return (
     <ScreenShell className="bg-ocean-500">
@@ -114,35 +242,45 @@ export function SpacePuzzleScreen({ onSolved }: SpacePuzzleScreenProps) {
             onClick={handleTargetSelect}
             className="block w-full rounded-[12px] bg-[#eac99b] p-2 transition enabled:ring-4 enabled:ring-blue-500/40 focus-visible:outline-4 focus-visible:outline-blue-500 disabled:cursor-default"
           >
-            <span className="relative block">
-              <Image
-                src="/assets/puzzles/space/space-board.png"
-                alt=""
-                width={295}
-                height={207}
-                sizes="295px"
-                className="h-auto w-full rounded-lg object-cover"
+            <span className="relative block aspect-[295/207] w-full overflow-hidden rounded-lg">
+              {boardImages.map((board) => (
+                <Image
+                  key={board.id}
+                  data-testid={`space-board-${board.id}`}
+                  src={board.image}
+                  alt=""
+                  fill
+                  priority
+                  sizes="295px"
+                  className={`object-cover ${
+                    activeBoardId === board.id ? "opacity-100" : "opacity-0"
+                  }`}
+                />
+              ))}
+
+              <span
+                ref={dadTargetRef}
+                aria-hidden="true"
+                className={`pointer-events-none absolute top-[6%] left-[34%] h-[46%] w-[52%] rounded-full ${
+                  selectedPiece === "dad" ? "ring-4 ring-blue-500/50" : ""
+                }`}
               />
 
-              {puzzlePieces.map((piece) => {
-                const isPlaced = placedPieces.includes(piece.id);
+              <span
+                ref={momTargetRef}
+                aria-hidden="true"
+                className={`pointer-events-none absolute top-[43%] left-[8%] h-[50%] w-[48%] rounded-full ${
+                  selectedPiece === "mom" ? "ring-4 ring-blue-500/50" : ""
+                }`}
+              />
 
-                if (!isPlaced) {
-                  return null;
-                }
-
-                return (
-                  <Image
-                    key={piece.id}
-                    src={piece.image}
-                    alt=""
-                    width={130}
-                    height={82}
-                    sizes="130px"
-                    className={`absolute object-contain ${piece.placement}`}
-                  />
-                );
-              })}
+              <span
+                ref={sonTargetRef}
+                aria-hidden="true"
+                className={`pointer-events-none absolute top-[58%] left-[58%] h-[35%] w-[35%] rounded-full ${
+                  selectedPiece === "son" ? "ring-4 ring-blue-500/50" : ""
+                }`}
+              />
             </span>
           </button>
 
@@ -157,12 +295,14 @@ export function SpacePuzzleScreen({ onSolved }: SpacePuzzleScreenProps) {
             className={`mb-3 min-h-4 text-center text-[11px] font-extrabold ${
               isCompleted
                 ? "text-green-500"
-                : selectedPiece
-                  ? "text-blue-500"
-                  : "text-navy-900"
+                : wrongPiece
+                  ? "text-coral-500"
+                  : selectedPiece
+                    ? "text-blue-500"
+                    : "text-navy-900"
             }`}
           >
-            {feedbackMessage}
+            {getFeedbackMessage()}
           </p>
 
           <ul
@@ -174,10 +314,34 @@ export function SpacePuzzleScreen({ onSolved }: SpacePuzzleScreenProps) {
 
               const isPlaced = placedPieces.includes(piece.id);
 
+              const isWrong = wrongPiece === piece.id;
+
               return (
                 <li key={piece.id}>
-                  <button
+                  <motion.button
                     type="button"
+                    drag={!isPlaced && !isCompleted}
+                    dragSnapToOrigin
+                    dragMomentum={false}
+                    dragElastic={0.08}
+                    whileDrag={{
+                      scale: 1.08,
+                      zIndex: 50,
+                    }}
+                    dragTransition={{
+                      bounceStiffness: 600,
+                      bounceDamping: 25,
+                    }}
+                    animate={
+                      isWrong
+                        ? {
+                            x: [0, -8, 8, -6, 6, 0],
+                          }
+                        : { x: 0 }
+                    }
+                    transition={{
+                      duration: isWrong ? 0.24 : 0.18,
+                    }}
                     aria-label={
                       isPlaced
                         ? `${piece.label} sudah terpasang`
@@ -186,12 +350,14 @@ export function SpacePuzzleScreen({ onSolved }: SpacePuzzleScreenProps) {
                     aria-pressed={isSelected}
                     disabled={isPlaced || isCompleted}
                     onClick={() => handlePieceSelect(piece.id)}
-                    className={`flex h-[82px] w-full items-center justify-center rounded-2xl border-4 bg-white/90 shadow-card transition focus-visible:outline-4 focus-visible:outline-blue-500 disabled:cursor-default ${
+                    onDragStart={() => handleDragStart(piece.id)}
+                    onDragEnd={(_, info) => handleDragEnd(piece.id, info)}
+                    className={`relative flex h-[82px] w-full touch-none select-none items-center justify-center rounded-2xl border-4 bg-white/90 shadow-card focus-visible:outline-4 focus-visible:outline-blue-500 disabled:cursor-default ${
                       isPlaced
-                        ? "border-green-500 opacity-50"
+                        ? "pointer-events-none opacity-0"
                         : isSelected
                           ? "scale-105 border-blue-500 ring-4 ring-blue-500/30"
-                          : "border-white/70 active:scale-95"
+                          : "border-white/70"
                     }`}
                   >
                     <Image
@@ -200,9 +366,10 @@ export function SpacePuzzleScreen({ onSolved }: SpacePuzzleScreenProps) {
                       width={90}
                       height={72}
                       sizes="90px"
-                      className="h-[72px] w-[90px] object-contain"
+                      draggable={false}
+                      className="pointer-events-none h-[72px] w-[90px] object-contain"
                     />
-                  </button>
+                  </motion.button>
                 </li>
               );
             })}
