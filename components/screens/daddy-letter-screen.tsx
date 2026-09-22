@@ -247,7 +247,7 @@ export function DaddyLetterScreen({ onReplay }: DaddyLetterScreenProps) {
               dateTime="2026-09-22"
               className="mt-4 block text-[11px] font-bold text-navy-900"
             >
-              September 22, 2026
+              September 25, 2026
             </time>
 
             <hr className="my-4 border-ocean-100" />
