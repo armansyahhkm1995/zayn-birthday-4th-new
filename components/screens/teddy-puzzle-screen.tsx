@@ -168,7 +168,7 @@ export function TeddyPuzzleScreen({ onSolved }: TeddyPuzzleScreenProps) {
           </p>
 
           <h1 className="mx-auto mt-4 max-w-[320px] text-[22px] leading-tight font-extrabold">
-            Cocokkan potongannya
+            Coba cari boneka beruang yang cocok Zayn
           </h1>
         </header>
 
